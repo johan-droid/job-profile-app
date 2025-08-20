@@ -1,0 +1,79 @@
+name: ai_talent_bridge
+description: An AI-Powered Talent Bridge platform that connects students with job opportunities and helps universities track employment outcomes.
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # UI components and utilities
+  cupertino_icons: ^1.0.5
+  google_fonts: ^5.1.0
+  flutter_svg: ^2.0.7
+  flutter_slidable: ^3.0.0
+  shimmer: ^3.0.0
+  cached_network_image: ^3.2.3
+  
+  # State management
+  provider: ^6.0.5
+  
+  # Charts for analytics dashboard
+  fl_chart: ^0.63.0
+  syncfusion_flutter_charts: ^23.1.44
+  
+  # PDF generation and handling
+  pdf: ^3.10.4
+  printing: ^5.11.0
+  path_provider: ^2.1.1
+  open_file: ^3.3.2
+  
+  # Date and time handling
+  intl: ^0.18.1
+  
+  # Responsive design
+  responsive_framework: ^1.1.1
+  
+  # Animation
+  lottie: ^2.6.0
+  
+  # Form validation and utilities
+  email_validator: ^2.1.17
+  url_launcher: ^6.1.14
+  
+  # Export functionality
+  screenshot: ^2.1.0
+  csv: ^5.0.2
+  syncfusion_flutter_pdf: ^23.1.44
+  
+  # Image handling
+  image_picker: ^1.0.4
+  flutter_image_compress: ^2.0.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.3
+  build_runner: ^2.4.6
+
+flutter:
+  uses-material-design: true
+  
+  # assets:
+  #   - assets/images/
+  #   - assets/icons/
+  #   - assets/animations/
+  #   - assets/fonts/
+  
+  fonts:
+    - family: OpenSans
+      fonts:
+        - asset: assets/fonts/OpenSans-Regular.ttf
+        - asset: assets/fonts/OpenSans-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/OpenSans-Light.ttf
+          weight: 300
+        - asset: assets/fonts/OpenSans-Italic.ttf
+          style: italic
