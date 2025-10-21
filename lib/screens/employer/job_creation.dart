@@ -166,7 +166,7 @@ class _JobCreationState extends State<JobCreation> {
                 labelText: 'Employment Type',
                 border: OutlineInputBorder(),
               ),
-              value: _employmentType,
+              initialValue: _employmentType,
               items: _employmentTypes.map((type) {
                 return DropdownMenuItem<String>(
                   value: type,

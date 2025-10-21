@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pdf/widgets.dart' as pw;
 import 'dart:typed_data';
 import '../../app_theme.dart';
 import '../../models/dummy_data.dart';
@@ -22,12 +21,12 @@ class _ResumeBuilderState extends State<ResumeBuilder> {
   ResumeTemplate _selectedTemplate = ResumeTemplate.modern;
   bool _isGeneratingPdf = false;
   Uint8List? _pdfPreview;
-  
+
   // Form controllers
   late TextEditingController _titleController;
   late TextEditingController _objectiveController;
   final TextEditingController _newProjectController = TextEditingController();
-  
+
   @override
   void initState() {
     super.initState();
@@ -37,11 +36,11 @@ class _ResumeBuilderState extends State<ResumeBuilder> {
       (r) => r.studentId == _studentProfile.userId,
       orElse: () => DummyData.resumes[0],
     );
-    
+
     _titleController = TextEditingController(text: _resume.title);
     _objectiveController = TextEditingController(text: _resume.objective);
   }
-  
+
   @override
   void dispose() {
     _titleController.dispose();
@@ -77,7 +76,7 @@ class _ResumeBuilderState extends State<ResumeBuilder> {
       ),
     );
   }
-  
+
   Widget _buildMobileLayout() {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
@@ -97,7 +96,7 @@ class _ResumeBuilderState extends State<ResumeBuilder> {
       ),
     );
   }
-  
+
   Widget _buildTabletLayout() {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -135,7 +134,7 @@ class _ResumeBuilderState extends State<ResumeBuilder> {
       ],
     );
   }
-  
+
   Widget _buildTemplateSelector() {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -223,7 +222,7 @@ class _ResumeBuilderState extends State<ResumeBuilder> {
       ),
     );
   }
-  
+
   Widget _buildResumeForm() {
     return Form(
       key: _formKey,
@@ -231,7 +230,8 @@ class _ResumeBuilderState extends State<ResumeBuilder> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Card(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
@@ -278,10 +278,11 @@ class _ResumeBuilderState extends State<ResumeBuilder> {
             ),
           ),
           const SizedBox(height: 16),
-          
+
           // Education Section
           Card(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
@@ -298,7 +299,8 @@ class _ResumeBuilderState extends State<ResumeBuilder> {
                         ),
                       ),
                       IconButton(
-                        icon: const Icon(Icons.add_circle, color: AppTheme.primaryColor),
+                        icon: const Icon(Icons.add_circle,
+                            color: AppTheme.primaryColor),
                         onPressed: () {
                           // Show dialog to add education
                         },
@@ -320,7 +322,8 @@ class _ResumeBuilderState extends State<ResumeBuilder> {
                             '${education.degree} in ${education.fieldOfStudy}, ${education.startDate.year} - ${education.endDate?.year ?? 'Present'}',
                           ),
                           trailing: IconButton(
-                            icon: const Icon(Icons.edit, color: AppTheme.secondaryColor),
+                            icon: const Icon(Icons.edit,
+                                color: AppTheme.secondaryColor),
                             onPressed: () {
                               // Show dialog to edit education
                             },
@@ -334,10 +337,11 @@ class _ResumeBuilderState extends State<ResumeBuilder> {
             ),
           ),
           const SizedBox(height: 16),
-          
+
           // Experience Section
           Card(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
@@ -354,7 +358,8 @@ class _ResumeBuilderState extends State<ResumeBuilder> {
                         ),
                       ),
                       IconButton(
-                        icon: const Icon(Icons.add_circle, color: AppTheme.primaryColor),
+                        icon: const Icon(Icons.add_circle,
+                            color: AppTheme.primaryColor),
                         onPressed: () {
                           // Show dialog to add experience
                         },
@@ -376,7 +381,8 @@ class _ResumeBuilderState extends State<ResumeBuilder> {
                             '${experience.role}, ${experience.startDate.year} - ${experience.endDate?.year ?? 'Present'}',
                           ),
                           trailing: IconButton(
-                            icon: const Icon(Icons.edit, color: AppTheme.secondaryColor),
+                            icon: const Icon(Icons.edit,
+                                color: AppTheme.secondaryColor),
                             onPressed: () {
                               // Show dialog to edit experience
                             },
@@ -390,10 +396,11 @@ class _ResumeBuilderState extends State<ResumeBuilder> {
             ),
           ),
           const SizedBox(height: 16),
-          
+
           // Skills Section
           Card(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
@@ -426,10 +433,11 @@ class _ResumeBuilderState extends State<ResumeBuilder> {
             ),
           ),
           const SizedBox(height: 16),
-          
+
           // Projects Section
           Card(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
@@ -446,7 +454,8 @@ class _ResumeBuilderState extends State<ResumeBuilder> {
                         ),
                       ),
                       IconButton(
-                        icon: const Icon(Icons.add_circle, color: AppTheme.primaryColor),
+                        icon: const Icon(Icons.add_circle,
+                            color: AppTheme.primaryColor),
                         onPressed: () {
                           _showAddProjectDialog();
                         },
@@ -483,10 +492,10 @@ class _ResumeBuilderState extends State<ResumeBuilder> {
       ),
     );
   }
-  
+
   Widget _buildAiSuggestions() {
     final suggestions = _resume.getAISuggestions();
-    
+
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       color: AppTheme.primaryColor.withOpacity(0.05),
@@ -544,7 +553,7 @@ class _ResumeBuilderState extends State<ResumeBuilder> {
       ),
     );
   }
-  
+
   Widget _buildPdfPreview() {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -583,7 +592,7 @@ class _ResumeBuilderState extends State<ResumeBuilder> {
       ),
     );
   }
-  
+
   void _showAddProjectDialog() {
     showDialog(
       context: context,
@@ -622,13 +631,13 @@ class _ResumeBuilderState extends State<ResumeBuilder> {
       },
     );
   }
-  
+
   Future<void> _generatePdfPreview() async {
     if (_formKey.currentState!.validate()) {
       setState(() {
         _isGeneratingPdf = true;
       });
-      
+
       try {
         final pdfService = PdfExportService();
         // Update resume with form data
@@ -645,9 +654,10 @@ class _ResumeBuilderState extends State<ResumeBuilder> {
           projects: _resume.projects,
           contactInfo: _resume.contactInfo,
         );
-        
-        final pdfBytes = await pdfService.generateResumePdf(updatedResume, _studentProfile);
-        
+
+        final pdfBytes =
+            await pdfService.generateResumePdf(updatedResume, _studentProfile);
+
         setState(() {
           _pdfPreview = pdfBytes;
           _isGeneratingPdf = false;
@@ -662,7 +672,7 @@ class _ResumeBuilderState extends State<ResumeBuilder> {
       }
     }
   }
-  
+
   void _downloadPdf() {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('PDF downloaded successfully')),

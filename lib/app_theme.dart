@@ -12,7 +12,7 @@ class AppTheme {
     fontWeight: FontWeight.bold,
     color: Colors.black87,
   );
-  
+
   static const TextStyle subheadingStyle = TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.w500,
@@ -22,7 +22,7 @@ class AppTheme {
   // Light theme
   static final ThemeData lightTheme = ThemeData(
     useMaterial3: true,
-    colorScheme: ColorScheme(
+    colorScheme: const ColorScheme(
       primary: primaryColor,
       secondary: secondaryColor,
       surface: Colors.white,
@@ -48,7 +48,7 @@ class AppTheme {
         ),
       ),
     ),
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       color: Colors.white,
       elevation: 2,
       shape: RoundedRectangleBorder(

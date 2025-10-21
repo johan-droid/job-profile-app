@@ -14,23 +14,23 @@ class JobSearch extends StatefulWidget {
 class _JobSearchState extends State<JobSearch> {
   final _searchController = TextEditingController();
   final _studentProfile = DummyData.studentProfiles[0];
-  
+
   // Filters
   String? _selectedLocation;
   String? _selectedEmploymentType;
   RangeValues _salaryRange = const RangeValues(0, 2000000);
-  
+
   List<JobListing> _filteredJobs = [];
   List<JobListing> _allJobs = [];
   bool _isFilterVisible = false;
-  
+
   @override
   void initState() {
     super.initState();
     _allJobs = DummyData.jobListings;
     _filteredJobs = _allJobs;
   }
-  
+
   @override
   void dispose() {
     _searchController.dispose();
@@ -44,7 +44,8 @@ class _JobSearchState extends State<JobSearch> {
         title: const Text('Job Search'),
         actions: [
           IconButton(
-            icon: Icon(_isFilterVisible ? Icons.filter_list_off : Icons.filter_list),
+            icon: Icon(
+                _isFilterVisible ? Icons.filter_list_off : Icons.filter_list),
             onPressed: () {
               setState(() {
                 _isFilterVisible = !_isFilterVisible;
@@ -59,7 +60,7 @@ class _JobSearchState extends State<JobSearch> {
       ),
     );
   }
-  
+
   Widget _buildMobileLayout() {
     return Column(
       children: [
@@ -74,7 +75,7 @@ class _JobSearchState extends State<JobSearch> {
       ],
     );
   }
-  
+
   Widget _buildTabletLayout() {
     return Row(
       children: [
@@ -98,7 +99,7 @@ class _JobSearchState extends State<JobSearch> {
       ],
     );
   }
-  
+
   Widget _buildSearchBar() {
     return TextField(
       controller: _searchController,
@@ -123,7 +124,7 @@ class _JobSearchState extends State<JobSearch> {
       },
     );
   }
-  
+
   Widget _buildFilterSection() {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -141,14 +142,14 @@ class _JobSearchState extends State<JobSearch> {
               ),
             ),
             const SizedBox(height: 16),
-            
+
             // Location filter
             DropdownButtonFormField<String>(
               decoration: const InputDecoration(
                 labelText: 'Location',
                 border: OutlineInputBorder(),
               ),
-              value: _selectedLocation,
+              initialValue: _selectedLocation,
               items: _getUniqueLocations().map((location) {
                 return DropdownMenuItem<String>(
                   value: location,
@@ -163,14 +164,14 @@ class _JobSearchState extends State<JobSearch> {
               },
             ),
             const SizedBox(height: 16),
-            
+
             // Employment type filter
             DropdownButtonFormField<String>(
               decoration: const InputDecoration(
                 labelText: 'Employment Type',
                 border: OutlineInputBorder(),
               ),
-              value: _selectedEmploymentType,
+              initialValue: _selectedEmploymentType,
               items: _getUniqueEmploymentTypes().map((type) {
                 return DropdownMenuItem<String>(
                   value: type,
@@ -185,7 +186,7 @@ class _JobSearchState extends State<JobSearch> {
               },
             ),
             const SizedBox(height: 16),
-            
+
             // Salary range filter
             const Text('Salary Range (₹)'),
             RangeSlider(
@@ -206,7 +207,7 @@ class _JobSearchState extends State<JobSearch> {
                 _applyFilters();
               },
             ),
-            
+
             const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -227,7 +228,7 @@ class _JobSearchState extends State<JobSearch> {
       ),
     );
   }
-  
+
   Widget _buildJobsList() {
     if (_filteredJobs.isEmpty) {
       return const Center(
@@ -251,7 +252,7 @@ class _JobSearchState extends State<JobSearch> {
         ),
       );
     }
-    
+
     return ListView.builder(
       padding: const EdgeInsets.all(16),
       itemCount: _filteredJobs.length,
@@ -265,10 +266,10 @@ class _JobSearchState extends State<JobSearch> {
       },
     );
   }
-  
+
   void _applyFilters() {
     String searchQuery = _searchController.text.toLowerCase();
-    
+
     setState(() {
       _filteredJobs = _allJobs.where((job) {
         // Search query filter
@@ -276,25 +277,31 @@ class _JobSearchState extends State<JobSearch> {
             job.title.toLowerCase().contains(searchQuery) ||
             job.company.toLowerCase().contains(searchQuery) ||
             job.description.toLowerCase().contains(searchQuery) ||
-            job.skills.any((skill) => skill.toLowerCase().contains(searchQuery));
-        
+            job.skills
+                .any((skill) => skill.toLowerCase().contains(searchQuery));
+
         // Location filter
-        bool matchesLocation = _selectedLocation == null ||
-            job.location == _selectedLocation;
-        
+        bool matchesLocation =
+            _selectedLocation == null || job.location == _selectedLocation;
+
         // Employment type filter
         bool matchesEmploymentType = _selectedEmploymentType == null ||
             job.employmentType == _selectedEmploymentType;
-        
+
         // Salary filter
-        bool matchesSalary = job.salaryMin == null || job.salaryMax == null ||
-            (job.salaryMin! <= _salaryRange.end && job.salaryMax! >= _salaryRange.start);
-        
-        return matchesSearch && matchesLocation && matchesEmploymentType && matchesSalary;
+        bool matchesSalary = job.salaryMin == null ||
+            job.salaryMax == null ||
+            (job.salaryMin! <= _salaryRange.end &&
+                job.salaryMax! >= _salaryRange.start);
+
+        return matchesSearch &&
+            matchesLocation &&
+            matchesEmploymentType &&
+            matchesSalary;
       }).toList();
     });
   }
-  
+
   void _resetFilters() {
     setState(() {
       _searchController.clear();
@@ -304,7 +311,7 @@ class _JobSearchState extends State<JobSearch> {
       _filteredJobs = _allJobs;
     });
   }
-  
+
   List<String> _getUniqueLocations() {
     Set<String> locations = {};
     for (var job in _allJobs) {
@@ -312,7 +319,7 @@ class _JobSearchState extends State<JobSearch> {
     }
     return locations.toList()..sort();
   }
-  
+
   List<String> _getUniqueEmploymentTypes() {
     Set<String> types = {};
     for (var job in _allJobs) {
@@ -320,14 +327,15 @@ class _JobSearchState extends State<JobSearch> {
     }
     return types.toList()..sort();
   }
-  
+
   void _showApplyConfirmation(JobListing job) {
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
           title: const Text('Apply for Job'),
-          content: Text('Are you sure you want to apply for ${job.title} at ${job.company}?'),
+          content: Text(
+              'Are you sure you want to apply for ${job.title} at ${job.company}?'),
           actions: [
             TextButton(
               onPressed: () {
@@ -347,7 +355,7 @@ class _JobSearchState extends State<JobSearch> {
       },
     );
   }
-  
+
   void _applyForJob(JobListing job) {
     // In a real app, this would send an application to a backend
     ScaffoldMessenger.of(context).showSnackBar(

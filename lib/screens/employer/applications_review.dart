@@ -105,7 +105,7 @@ class _ApplicationsReviewState extends State<ApplicationsReview> {
                 labelText: 'Job Position',
                 border: OutlineInputBorder(),
               ),
-              value: _selectedJobId,
+              initialValue: _selectedJobId,
               items: [
                 const DropdownMenuItem<String?>(
                   value: null,
@@ -133,7 +133,7 @@ class _ApplicationsReviewState extends State<ApplicationsReview> {
                 labelText: 'Application Status',
                 border: OutlineInputBorder(),
               ),
-              value: _selectedStatus,
+              initialValue: _selectedStatus,
               items: [
                 const DropdownMenuItem<ApplicationStatus?>(
                   value: null,
@@ -506,7 +506,7 @@ class _ApplicationsReviewState extends State<ApplicationsReview> {
                             labelText: 'Update Status',
                             border: OutlineInputBorder(),
                           ),
-                          value: application.status,
+                          initialValue: application.status,
                           items: ApplicationStatus.values.map((status) {
                             return DropdownMenuItem<ApplicationStatus>(
                               value: status,

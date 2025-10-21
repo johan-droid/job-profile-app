@@ -73,7 +73,7 @@ class CustomDropdownField<T> extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
         ),
       ),
-      value: value,
+      initialValue: value,
       items: items,
       onChanged: onChanged,
       validator: validator,
@@ -124,15 +124,17 @@ class _CustomChipInputState extends State<CustomChipInput> {
         Wrap(
           spacing: 8,
           runSpacing: 8,
-          children: widget.values.map((value) => Chip(
-            label: Text(value),
-            deleteIconColor: Colors.red,
-            onDeleted: () {
-              final newValues = List<String>.from(widget.values);
-              newValues.remove(value);
-              widget.onChanged(newValues);
-            },
-          )).toList(),
+          children: widget.values
+              .map((value) => Chip(
+                    label: Text(value),
+                    deleteIconColor: Colors.red,
+                    onDeleted: () {
+                      final newValues = List<String>.from(widget.values);
+                      newValues.remove(value);
+                      widget.onChanged(newValues);
+                    },
+                  ))
+              .toList(),
         ),
         const SizedBox(height: 8),
         Row(
@@ -223,7 +225,7 @@ class DatePickerField extends StatelessWidget {
       firstDate: firstDate ?? DateTime(1900),
       lastDate: lastDate ?? DateTime(2100),
     );
-    
+
     if (picked != null && picked != selectedDate) {
       onDateChanged(picked);
     }
@@ -258,7 +260,8 @@ class CustomSegmentedControl<T> extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 decoration: BoxDecoration(
-                  color: isSelected ? AppTheme.primaryColor : Colors.transparent,
+                  color:
+                      isSelected ? AppTheme.primaryColor : Colors.transparent,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Center(
@@ -266,7 +269,8 @@ class CustomSegmentedControl<T> extends StatelessWidget {
                     entry.value,
                     style: TextStyle(
                       color: isSelected ? Colors.white : Colors.black87,
-                      fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                      fontWeight:
+                          isSelected ? FontWeight.bold : FontWeight.normal,
                     ),
                   ),
                 ),
